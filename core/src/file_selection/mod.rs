@@ -56,6 +56,8 @@ impl FileSelector {
             .try_collect()
             .await?;
 
-        strategy.execute(data_files, config)
+        let partition_spec = table.metadata().default_partition_spec();
+
+        strategy.execute(data_files, config, partition_spec)
     }
 }
